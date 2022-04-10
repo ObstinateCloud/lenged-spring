@@ -76,7 +76,7 @@ public class LengedApplicationContext {
 
                 }
             }
-            
+
 
 
         }
@@ -149,7 +149,7 @@ public class LengedApplicationContext {
                 //非单例每次都返回一个对象
                 return createBean(beanName,beanDefinition);
             }
-            
+
         }
     }
 }
