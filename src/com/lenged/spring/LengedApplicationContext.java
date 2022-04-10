@@ -7,6 +7,8 @@ import com.sun.xml.internal.ws.util.StringUtils;
 import java.beans.Introspector;
 import java.io.File;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -87,13 +89,36 @@ public class LengedApplicationContext {
             }
 
         }
+
+
     }
 
     private Object createBean(String beanName, BeanDefinition beanDefinition) {
         Class aClass = beanDefinition.getType();
 
         try {
-            Object instance = aClass.newInstance();
+            Object instance = null;
+            try {
+                //要求bean必须要有无参构造方法
+                instance = aClass.getConstructor().newInstance();
+
+                //为bean中的属性赋值
+                for (Field declaredField : aClass.getDeclaredFields()) {
+                    if(declaredField.isAnnotationPresent(Autowired.class)){
+                        declaredField.setAccessible(true);
+                        declaredField.set(instance,getBean(declaredField.getName()));
+                    }
+
+                }
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            // Aware方法回调
+            if(instance instanceof BeanNameAware){
+                ((BeanNameAware) instance).setBeanName(beanName);
+            }
             return instance;
         } catch (InstantiationException e) {
             e.printStackTrace();
