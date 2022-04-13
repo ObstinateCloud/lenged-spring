@@ -1,13 +1,10 @@
 package com.lenged.service;
 
-import com.lenged.spring.Autowired;
-import com.lenged.spring.BeanNameAware;
-import com.lenged.spring.Component;
-import com.lenged.spring.Scope;
+import com.lenged.spring.*;
 
 @Component
 //@Scope("prototype")
-public class UserService implements BeanNameAware {
+public class UserService implements BeanNameAware,InitializingBean,UserInterface {
 
     @Autowired
     private OrderService orderService;
@@ -22,5 +19,10 @@ public class UserService implements BeanNameAware {
     @Override
     public void setBeanName(String beanName) {
         this.beanName = beanName;
+    }
+
+    @Override
+    public void afterPropertiesSet() {
+        System.out.println("init method");
     }
 }

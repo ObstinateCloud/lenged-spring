@@ -11,8 +11,10 @@ public class Test {
 //        System.out.println(context.getBean("userService"));
 //        System.out.println(context.getBean("userService"));
 //   2.依赖注入测试
-        UserService userService = (UserService) context.getBean("userService");
+//        UserService userService = (UserService) context.getBean("userService");
+        //代理方法
+        UserInterface userService = (UserInterface) context.getBean("userService");
         userService.test();
-        System.out.println(userService.beanName);
+//        System.out.println(userService.beanName);
     }
 }
