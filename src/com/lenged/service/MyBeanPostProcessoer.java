@@ -1,7 +1,7 @@
 package com.lenged.service;
 
 import com.lenged.spring.BeanPostProcessor;
-import com.lenged.spring.Component;
+import com.lenged.spring.annotation.Component;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

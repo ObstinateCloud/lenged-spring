@@ -1,6 +1,8 @@
 package com.lenged.service;
 
 import com.lenged.spring.*;
+import com.lenged.spring.annotation.Autowired;
+import com.lenged.spring.annotation.Component;
 
 @Component
 //@Scope("prototype")

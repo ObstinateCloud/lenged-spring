@@ -1,12 +1,12 @@
 package com.lenged.spring;
 
-import com.lenged.service.AppConfig;
-import com.lenged.service.UserService;
-import com.sun.xml.internal.ws.util.StringUtils;
+import com.lenged.spring.annotation.Autowired;
+import com.lenged.spring.annotation.Component;
+import com.lenged.spring.annotation.ComponentScan;
+import com.lenged.spring.annotation.Scope;
 
 import java.beans.Introspector;
 import java.io.File;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -164,6 +164,7 @@ public class LengedApplicationContext {
     }
 
     public Object getBean(String beanName) {
+        //判断是否有bean的定义
         BeanDefinition beanDefinition = beanDefinitionMap.get(beanName);
         if (beanDefinition == null) {
             throw new NullPointerException();

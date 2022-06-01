@@ -1,4 +1,4 @@
-package com.lenged.spring;
+package com.lenged.spring.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Component {
+public @interface ComponentScan {
 
-    String value() default ""; //默认beanName
+    String value() default ""; //扫描路径
 }
